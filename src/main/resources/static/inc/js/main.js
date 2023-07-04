@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-import { VRButton } from 'three/addons/webxr/VRButton.js';
+import { ARButton } from 'three/addons/webxr/ARButton.js';
 
 let camera, textMesh;
 
@@ -54,8 +54,8 @@ function setupRenderer() {
   renderer.setSize( window.innerWidth, window.innerHeight, false );
   document.body.appendChild( renderer.domElement );
   
-  //Create the VR button so that the user can start a VR session
-  document.body.appendChild( VRButton.createButton( renderer ) );
+  //Create the AR button so that the user can start a AR session
+  document.body.appendChild( ARButton.createButton( renderer ) );
 
   renderer.xr.enabled = true;
 }
@@ -153,18 +153,12 @@ function createAndAddText() {
   
 // Start the event stream
 function startEventStream() {
-  const eventSource = new EventSource('/event-stream');
+  const socket = new WebSocket("wss://localhost:443/counter");
 
   //Update the value of the counter then refresh the text
-  eventSource.onmessage = function (event) {
-    counterValue = event.data.toString();
+  socket.onmessage = function (event) {
+    counterValue = event.data;
     refreshText();
-  };
-
-  eventSource.onerror = function () {
-    console.error('Error occurred in event stream');
-    eventSource.close();
-    setTimeout(startEventStream, 5000);
   };
 }
 
