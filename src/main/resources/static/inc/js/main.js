@@ -54,7 +54,7 @@ function setupRenderer() {
   renderer.setSize( window.innerWidth, window.innerHeight, false );
   document.body.appendChild( renderer.domElement );
   
-  //Create the AR button so that the user can start a AR session
+  //Create the VR button so that the user can start a VR session
   document.body.appendChild( VRButton.createButton( renderer ) );
 
   renderer.xr.enabled = true;
