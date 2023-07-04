@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import WebGL from 'three/addons/capabilities/WebGL.js';
 import { FontLoader } from 'three/addons/loaders/FontLoader.js';
 import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
-import { ARButton } from 'three/addons/webxr/ARButton.js';
+import { VRButton } from 'three/addons/webxr/VRButton.js';
 
 let camera, textMesh;
 
@@ -55,7 +55,7 @@ function setupRenderer() {
   document.body.appendChild( renderer.domElement );
   
   //Create the AR button so that the user can start a AR session
-  document.body.appendChild( ARButton.createButton( renderer ) );
+  document.body.appendChild( VRButton.createButton( renderer ) );
 
   renderer.xr.enabled = true;
 }
